@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <h3>How many teams?</h3>
+        <br>
+        <input type="number" value=20 id="numOfTeams" onChange="addTeamInputs()">
+        <br><br><br>
+        <div id="teamContainer"></div>
+        <br>
+        <h3>How many sets of teams?</h3>
+        <br>
+        <input type="number" value=2 id="setsOfTeams" onchange="updateSetsOfTeams()">
+        <br><br><br>
+        <button type="submit" onclick="randomize()">Submit</button>
+        <br><br><br>
+        <div id="orderContainer"></div>
+
+        <script>
+            var divContainer = document.getElementById("teamContainer");
+            var numOfTeams = document.getElementById("numOfTeams");
+            var setsOfTeams = document.getElementById("setsOfTeams");
+            numOfTeams.value = 20;
+            setsOfTeams.value = 2;
+            function addTeamInputs() {
+                var divContainer = document.getElementById("teamContainer");
+                divContainer.innerHTML = "";
+                var numOfTeams = document.getElementById("numOfTeams")
+                for (i = 0; i < numOfTeams.value; i++) {
+                    teamName = document.createElement("span")
+                    teamName.innerHTML = `  Team ${i+1}:  `
+                    divContainer.appendChild(teamName)
+
+                    input = document.createElement("input")
+                    input.id=`team ${i}`
+                    divContainer.appendChild(input)
+
+                    if (i%2) {
+                        lineBreak = document.createElement("br")
+                        divContainer.appendChild(lineBreak)
+                    }
+                }
+            }
+            function updateSetsOfTeams() {
+                setsOfTeams = document.getElementById("setsOfTeams")
+            }
+
+            addTeamInputs();
+
+            function randomize() {
+                orderContainer = document.getElementById("orderContainer");
+                orderContainer.innerHTML = '';
+                var listOfTeams = []
+                for (i = 0; i<numOfTeams.value; i++) {
+                    if (document.getElementById(`team ${i}`).value == '' || document.getElementById(`team ${i}`).value == null) {
+                        alert("Fill in all the info")
+                        break
+                    }
+                    listOfTeams.push(document.getElementById(`team ${i}`).value)
+                }
+                currentIndex = listOfTeams.length;
+                while (currentIndex != 0) {
+                    randomIndex = Math.floor(Math.random() * currentIndex);
+                    currentIndex -= 1;
+
+                    [listOfTeams[currentIndex], listOfTeams[randomIndex]] = [listOfTeams[randomIndex], listOfTeams[currentIndex]]
+                }
+                for (i = 0; i < setsOfTeams.value; i++) {
+                    newDivContainer = document.createElement("div")
+                    newDivContainer.id=`set ${i}`
+
+                    newLabel = document.createElement("p")
+                    newLabel.innerHTML = `Set ${i+1}`
+                    newDivContainer.appendChild(newLabel)
+
+                    newList = document.createElement("ol")
+                    newList.id = `set${i}list`
+                    newDivContainer.appendChild(newList)
+
+                    orderContainer.appendChild(newDivContainer)
+                }
+                while (listOfTeams.length > 0) {
+                    for (i = 0; i < setsOfTeams.value; i++) {
+                        currentList = document.getElementById(`set${i}list`)
+
+                        newListItem = document.createElement("li")
+                        newListItem.innerHTML = listOfTeams[listOfTeams.length -1]
+
+                        currentList.appendChild(newListItem)
+                        listOfTeams.pop()
+                    }
+                }
+            }
+
+        </script>
+    </body>
+</html>
