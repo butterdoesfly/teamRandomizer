@@ -14,7 +14,7 @@
         <br>
         <input type="number" value=2 id="setsOfTeams" onchange="updateSetsOfTeams()">
         <br><br><br>
-        <button type="submit" onclick="randomize()">Submit</button>
+        <button type="submit" onclick="randomize()">Submit</button><button onclick="clear()">Clear</button>
         <br><br><br>
         <div id="orderContainer"></div>
 
@@ -30,7 +30,7 @@
                 var numOfTeams = document.getElementById("numOfTeams")
                 for (i = 0; i < numOfTeams.value; i++) {
                     teamName = document.createElement("span")
-                    teamName.innerHTML = `  Team ${i+1}:  `
+                    teamName.innerHTML = `  Person ${i+1}:  `
                     divContainer.appendChild(teamName)
 
                     input = document.createElement("input")
@@ -72,7 +72,7 @@
                     newDivContainer.id=`set ${i}`
 
                     newLabel = document.createElement("p")
-                    newLabel.innerHTML = `Set ${i+1}`
+                    newLabel.innerHTML = `Team ${i+1}`
                     newDivContainer.appendChild(newLabel)
 
                     newList = document.createElement("ol")
@@ -92,6 +92,11 @@
                         listOfTeams.pop()
                     }
                 }
+            }
+
+            function clear() {
+                orderContainer = document.getElementById("orderContainer");
+                orderContainer.innerHTML = '';
             }
 
         </script>
