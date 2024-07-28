@@ -4,7 +4,7 @@
 
     </head>
     <body>
-        <h3>How many people?</h3>
+        <h3>How many teams?</h3>
         <br>
         <input type="number" value=20 id="numOfTeams" onChange="addTeamInputs()">
         <br><br><br>
@@ -30,7 +30,7 @@
                 var numOfTeams = document.getElementById("numOfTeams")
                 for (i = 0; i < numOfTeams.value; i++) {
                     teamName = document.createElement("span")
-                    teamName.innerHTML = `  Person ${i+1}:  `
+                    teamName.innerHTML = `  Team ${i+1}:  `
                     divContainer.appendChild(teamName)
 
                     input = document.createElement("input")
@@ -72,7 +72,7 @@
                     newDivContainer.id=`set ${i}`
 
                     newLabel = document.createElement("p")
-                    newLabel.innerHTML = `Team ${i+1}`
+                    newLabel.innerHTML = `Set ${i+1}`
                     newDivContainer.appendChild(newLabel)
 
                     newList = document.createElement("ol")
